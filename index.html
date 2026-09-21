@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hyper Bounce - An original neon brick-breaker</title>
+<meta name="description" content="Hyper Bounce is an original neon arcade brick-breaker. Clear 60 hand-built levels across 5 neon zones, chain your combo and grab 17 wild power-ups. Plays offline, no account needed.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hyper Bounce - An original neon brick-breaker">
+<meta property="og:description" content="60 hand-built levels across 5 neon zones, 17 power-ups, combo scoring. Plays offline, no account needed.">
+<meta property="og:image" content="https://vibedev1229.github.io/hyperbounce-site/assets/og-image.png">
+<meta property="og:url" content="https://vibedev1229.github.io/hyperbounce-site/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://vibedev1229.github.io/hyperbounce-site/assets/og-image.png">
+<link rel="icon" href="assets/icon.png">
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #eaf2ff;
+    --dim: #a9b6d6;
+    --cyan: #7fe6ff;
+    --violet: #c9a6ff;
+    --panel: rgba(12, 14, 34, 0.62);
+    --edge: rgba(140, 160, 255, 0.18);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: #06070f; color: var(--ink);
+    font-family: "Rajdhani", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 18px; line-height: 1.6;
+  }
+  h1, h2, .logo { font-family: "Orbitron", "Rajdhani", sans-serif; letter-spacing: 0.02em; }
+  a { color: var(--cyan); }
+
+  .hero {
+    position: relative; overflow: hidden; text-align: center;
+    padding: 76px 22px 68px;
+    background: #0a0a18 url("assets/hero.png") center 38% / cover no-repeat;
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(6,7,15,.62) 0%, rgba(6,7,15,.28) 42%, rgba(6,7,15,.92) 100%);
+  }
+  .hero > * { position: relative; z-index: 1; }
+  .appicon {
+    width: 132px; height: 132px; border-radius: 30px; display: block; margin: 0 auto 22px;
+    box-shadow: 0 0 44px rgba(90, 170, 255, .45), 0 10px 30px rgba(0,0,0,.55);
+  }
+  h1 { font-size: clamp(2.1rem, 6vw, 3.4rem); margin: 0 0 8px; font-weight: 800; }
+  .tagline { font-size: clamp(1.05rem, 2.6vw, 1.35rem); color: var(--cyan); margin: 0 0 6px; }
+  .stats { color: var(--violet); margin: 0 0 30px; font-size: 1.02rem; }
+
+  /* Official store badges. Apple's SVG is the bare badge; Google's PNG has its required
+     clear-space baked in, so Google is sized taller to make the two read the same height. */
+  .badges { display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; }
+  .badge-appstore img { height: 54px; display: block; }
+  .badge-googleplay img { height: 80px; display: block; }
+  .badge-appstore, .badge-googleplay { display: inline-block; transition: transform .15s ease, opacity .15s ease; }
+  .badge-googleplay:hover, .badge-appstore:hover { transform: translateY(-2px); }
+  .badge-soon { position: relative; display: inline-block; opacity: .62; cursor: default; }
+  .badge-soon .pill {
+    position: absolute; top: -9px; right: -6px; background: var(--cyan); color: #05131b;
+    font-family: "Rajdhani", sans-serif; font-weight: 600; font-size: .72rem;
+    padding: 1px 8px; border-radius: 999px; letter-spacing: .04em;
+  }
+
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 22px; }
+  section { padding: 62px 0 8px; }
+  h2 { font-size: 1.5rem; margin: 0 0 22px; color: #fff; }
+
+  .features { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px;
+              grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+  .features li {
+    background: var(--panel); border: 1px solid var(--edge); border-radius: 12px;
+    padding: 16px 18px; color: var(--dim);
+  }
+  .features b { color: var(--ink); display: block; font-weight: 600; margin-bottom: 2px; }
+
+  .shots { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+  .shots img {
+    width: 100%; border-radius: 14px; border: 1px solid var(--edge);
+    box-shadow: 0 10px 28px rgba(0,0,0,.5);
+  }
+
+  footer {
+    margin-top: 66px; padding: 34px 22px 46px; border-top: 1px solid var(--edge);
+    color: var(--dim); font-size: .95rem; text-align: center;
+  }
+  footer nav { margin-bottom: 14px; }
+  footer nav a { margin: 0 10px; }
+  .legal { font-size: .82rem; color: #7c88a8; max-width: 760px; margin: 14px auto 0; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <img class="appicon" src="assets/icon.png" alt="Hyper Bounce app icon">
+  <h1>HYPER BOUNCE</h1>
+  <p class="tagline">An original neon brick-breaker</p>
+  <p class="stats">60 hand-built levels . 5 neon zones . 17 power-ups</p>
+
+  <div class="badges">
+    <!-- ON APP STORE APPROVAL: replace this <span class="badge-soon"> block with
+         <a class="badge-appstore" href="https://apps.apple.com/app/id6812983236"> ... </a>
+         The link 404s until the app is live, which is why it is unlinked for now. -->
+    <span class="badge-soon">
+      <span class="pill">Coming soon</span>
+      <span class="badge-appstore"><img src="assets/badge-appstore.svg" alt="Download on the App Store"></span>
+    </span>
+
+    <a class="badge-googleplay" href="https://play.google.com/store/apps/details?id=com.hyperbounce.game">
+      <img src="assets/badge-googleplay.png" alt="Get it on Google Play">
+    </a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <h2>What it is</h2>
+    <ul class="features">
+      <li><b>60 hand-built levels</b>Five neon zones, each with its own look and soundtrack.</li>
+      <li><b>17 power-ups</b>Multi-ball, wide paddle, magnet catch, laser, phase-through, lightning, nova shockwaves and a giant mega ball.</li>
+      <li><b>4 brick types</b>Coloured, indestructible, volatile chain-explosions and hidden bricks.</li>
+      <li><b>Combo scoring</b>Clean rallies multiply your score. Touch the paddle and the chain resets.</li>
+      <li><b>Portrait or landscape</b>Play whichever way you like, on phone or tablet.</li>
+      <li><b>Offline, no account</b>No sign-up, no server. Progress lives on your device.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Screenshots</h2>
+    <div class="shots">
+      <img src="assets/shot-play.png" alt="Hyper Bounce gameplay with active power-ups and a combo">
+      <img src="assets/shot-vfx.png" alt="Lightning and nova shockwave effects clearing bricks">
+      <img src="assets/shot-select.png" alt="Level select screen showing the neon zones">
+      <img src="assets/shot-menu.png" alt="Hyper Bounce main menu">
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <nav>
+    <a href="https://vibedev1229.github.io/hyperbounce-privacy/support.html">Support</a>
+    <a href="https://vibedev1229.github.io/hyperbounce-privacy/ios.html">Privacy (iOS)</a>
+    <a href="https://vibedev1229.github.io/hyperbounce-privacy/">Privacy (Android)</a>
+    <a href="mailto:vibedev1229@gmail.com">Contact</a>
+  </nav>
+  <p>Developed by VibeDeV . Published by VIBECORE DIGITAL</p>
+  <p><a href="mailto:vibedev1229@gmail.com">vibedev1229@gmail.com</a></p>
+  <p class="legal">
+    Apple and the Apple logo are trademarks of Apple Inc., registered in the U.S. and other
+    countries and regions. App Store is a service mark of Apple Inc.
+    Google Play and the Google Play logo are trademarks of Google LLC.
+  </p>
+</footer>
+
+</body>
+</html>
